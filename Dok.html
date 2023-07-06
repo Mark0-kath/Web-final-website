@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Your Store</title>
+  <style>
+    /* CSS styles omitted for brevity */
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Store</h1>
+  </header>
+  <nav>
+    <a href="#" id="homeLink">Home</a>
+    <a href="#" id="productsLink">Products</a>
+    <a href="#" id="aboutUsLink">About Us</a>
+    <a href="#">Contact</a>
+  </nav>
+  <section id="contentSection">
+    <h2>Welcome to Your Store!</h2>
+    <p>Explore our wide range of products and find what you need.</p>
+  </section>
+  <footer>
+    &copy; 2023 Your Store. All rights reserved.
+  </footer>
+
+  <script>
+    // Define your items with images and prices
+    const items = [
+      { name: 'Item 1', price: 10, image: 'item1.jpg' },
+      { name: 'Item 2', price: 20, image: 'item2.jpg' },
+      { name: 'Item 3', price: 15, image: 'item3.jpg' },
+      { name: 'Item 4', price: 12, image: 'item4.jpg' }
+    ];
+
+    // Function to display items and prices
+    function displayItems() {
+      const contentSection = document.getElementById('contentSection');
+
+      // Create a list to hold the items
+      const itemList = document.createElement('ul');
+
+      // Iterate over the items array and create list items
+      items.forEach(item => {
+        const listItem = document.createElement('li');
+
+        // Create an image element and set its source
+        const itemImage = document.createElement('img');
+        itemImage.src = item.image;
+        itemImage.alt = item.name;
+        listItem.appendChild(itemImage);
+
+        // Create a div for item information
+        const itemInfo = document.createElement('div');
+
+        // Create heading for item name
+        const itemName = document.createElement('h3');
+        itemName.textContent = item.name;
+        itemInfo.appendChild(itemName);
+
+        // Create paragraph for item price (hidden by default)
+        const itemPrice = document.createElement('p');
+        itemPrice.textContent = `Price: $${item.price}`;
+        itemPrice.style.display = 'none';
+        itemInfo.appendChild(itemPrice);
+
+        // Create a button to show/hide the price
+        const priceButton = document.createElement('button');
+        priceButton.textContent = 'Show Price';
+        priceButton.addEventListener('click', function() {
+          if (itemPrice.style.display === 'none') {
+            itemPrice.style.display = 'block';
+            priceButton.textContent = 'Hide Price';
+          } else {
+            itemPrice.style.display = 'none';
+            priceButton.textContent = 'Show Price';
+          }
+        });
+        itemInfo.appendChild(priceButton);
+
+        // Append item information to the list item
+        listItem.appendChild(itemInfo);
+
+        // Append the list item to the item list
+        itemList.appendChild(listItem);
+      });
+
+      // Clear existing content and append the item list
+      contentSection.innerHTML = '';
+      contentSection.appendChild(itemList);
+    }
+
+    // Attach click event handler to the "Home" link
+    const homeLink = document.getElementById('homeLink');
+    homeLink.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default link behavior
+      displayItems(); // Call the function to display items
+    });
+
+    // Rest of the code remains the same...
+  </script>
+</body>
+</html>
+
